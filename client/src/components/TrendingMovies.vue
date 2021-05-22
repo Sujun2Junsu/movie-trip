@@ -47,11 +47,6 @@
           <img :src="trendingMovie9">
         </div>
       </splide-slide>
-      <splide-slide>
-        <div>
-          <img :src="trendingMovie10">
-        </div>
-      </splide-slide>
     </splide>
   </div>
 
@@ -78,11 +73,9 @@ export default {
       trendingMovie7: null,
       trendingMovie8: null,
       trendingMovie9: null,
-      trendingMovie10: null,
       options: {
-          type   : 'loop',
+          type : 'loop',
           perPage: 3,
-          focus  : 'center'
         },
     }
   },
@@ -106,7 +99,6 @@ export default {
           this.trendingMovie7 = `https://image.tmdb.org/t/p/w200${res.data.results[6].poster_path}`
           this.trendingMovie8 = `https://image.tmdb.org/t/p/w200${res.data.results[7].poster_path}`
           this.trendingMovie9 = `https://image.tmdb.org/t/p/w200${res.data.results[8].poster_path}`
-          this.trendingMovie10 = `https://image.tmdb.org/t/p/w200${res.data.results[9].poster_path}`
         })
         .catch(err => {
           console.log(err)

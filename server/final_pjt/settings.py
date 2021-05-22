@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'rest_framework.authtoken',
     # 'rest_auth',
+    'allauth',
+    'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
+
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,13 +50,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 ]
 
 # REST_FRAMEWORK = {
 #     'DEFAULT_PERMISSION_CLASSES': (
 #         'rest_framework.permissions.IsAuthenticated', # 인증된 사용자만 접근 가능
 #         'rest_framework.permissions.IsAdminUser', # 관리자만 접근 가능
-#         # 'rest_framework.permissions.AllowAny', # 누구나 접근 가능
+#         'rest_framework.permissions.AllowAny', # 누구나 접근 가능
 
 #     ),
 
@@ -147,9 +153,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -170,6 +176,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
 
+AUTHENTICATION_BACKENDS = [
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 JWT_AUTH = {
     # 'JWT_SECRET_KEY': SECRET_KEY,
     # 'JWT_ALGORITHM': 'HS256', # 암호화 알고리즘
@@ -178,3 +193,5 @@ JWT_AUTH = {
     # 'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=1), # JWT 토큰 갱신 유효기간
     # import datetime 상단에 import 하기
 }
+
+SITE_ID = 1

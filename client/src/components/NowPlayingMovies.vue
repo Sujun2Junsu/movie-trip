@@ -16,7 +16,7 @@
     <div class="carousel-inner mh-100" style="width: 100%; height: 600px; background-color: black;">
       <p style="color: white;">Now Playing</p>
       <span class="carousel-item active">
-          <img :src="this.firstNowPlayingMovie" class="m-0" style="height: 550px; padding-bottom: 25px;" alt="이미지를 불러올 수 없습니다.">
+          <img :src="this.firstNowPlayingMoviePic" class="m-0" style="height: 550px; padding-bottom: 25px;" alt="이미지를 불러올 수 없습니다.">
       </span>
       <NowPlayingMoviesItem
         v-for="(movie, idx) in nowPlayingMovies"
@@ -46,7 +46,7 @@ export default {
   name: 'NowPlayingMovies',
   data: function () {
     return {
-      firstNowPlayingMovie: null,
+      firstNowPlayingMoviePic: null,
       nowPlayingMovies: null,
     }
   },
@@ -60,14 +60,28 @@ export default {
         url: `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=ko-KR&page=1`
       })
         .then(res => {
-          this.nowPlayingMovies = res.data.results.slice(1,10)
+          const allNowPlayingMovies = res.data.results
+          this.nowPlayingMovies = allNowPlayingMovies.slice(1,10)
           // carousel의 첫번째 아이템의 class에만 active를 붙이기 위해 따로 떼어냄
-          this.firstNowPlayingMovie = `https://image.tmdb.org/t/p/w500${res.data.results[0].poster_path}`  
+          this.firstNowPlayingMoviePic = `https://image.tmdb.org/t/p/w500${allNowPlayingMovies[0].poster_path}`
+          
+          // DB에 없는 영화라면 자동으로 DB에 등록되게 함
+          axios({
+            method: 'post',
+            url: 'http://127.0.0.1:8000/movies/auto-create-movies/',
+            data: allNowPlayingMovies
+          })
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
         })
         .catch(err => {
           console.log(err)
         })
-    }
+    },
   },
   created: function () {
     this.getNowPlayingMovies()
