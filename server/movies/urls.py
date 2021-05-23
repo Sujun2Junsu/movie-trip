@@ -6,5 +6,5 @@ app_name="movies"
 
 urlpatterns = [
     path('create-movies/', tmdb.create_movies),
-    path('movies/', views.movie_list, name='movie_list'),
+    path('movie-list/', views.movie_list, name='movie_list'),
 ]
