@@ -15,10 +15,10 @@ def create_movies(request):
     # 필요한 정보 골라내기
     movie_list = movie_dict.get('results')
     for movie in movie_list:
-        title = movie.get('original_title')
+        title = movie.get('title')
         overview = movie.get('overview')
         release_date = movie.get('release_date')
-        poster_path = movie.get('poster_path')
+        poster_path = 'https://image.tmdb.org/t/p/w500' + movie.get('poster_path')
         popularity = movie.get('popularity')
 
         # DB에 저장하기, 중복제거
@@ -28,7 +28,7 @@ def create_movies(request):
             'model': "movies.movie",
             # 'pk': len(results) + 1,
             "fields": {
-            'poster_path': 'https://image.tmdb.org/t/p/w500' +  poster_path,
+            'poster_path': poster_path,
             'title': title,
             'overview': overview,
             'release_date': release_date,
@@ -45,10 +45,10 @@ def create_movies(request):
     # 필요한 정보 골라내기
     movie_list = movie_dict.get('results')
     for movie in movie_list:
-        title = movie.get('original_title')
+        title = movie.get('title')
         overview = movie.get('overview')
         release_date = movie.get('release_date')
-        poster_path = movie.get('poster_path')
+        poster_path = 'https://image.tmdb.org/t/p/w500' + movie.get('poster_path')
         popularity = movie.get('popularity')
 
         # DB에 저장하기, 중복제거
@@ -58,7 +58,7 @@ def create_movies(request):
             'model': "movies.movie",
             # 'pk': len(results) + 1,
             "fields": {
-            'poster_path': 'https://image.tmdb.org/t/p/w500' +  poster_path,
+            'poster_path': poster_path,
             'title': title,
             'overview': overview,
             'release_date': release_date,
@@ -76,10 +76,10 @@ def create_movies(request):
     # 필요한 정보 골라내기
     movie_list = movie_dict.get('results')
     for movie in movie_list:
-        title = movie.get('original_title')
+        title = movie.get('title')
         overview = movie.get('overview')
         release_date = movie.get('release_date')
-        poster_path = movie.get('poster_path')
+        poster_path = 'https://image.tmdb.org/t/p/w500' + movie.get('poster_path')
         popularity = movie.get('popularity')
 
         # DB에 저장하기, 중복제거
@@ -89,7 +89,7 @@ def create_movies(request):
             'model': "movies.movie",
             # 'pk': len(results) + 1,
             "fields": {
-            'poster_path': 'https://image.tmdb.org/t/p/w500' +  poster_path,
+            'poster_path': poster_path,
             'title': title,
             'overview': overview,
             'release_date': release_date,
@@ -106,10 +106,10 @@ def create_movies(request):
     # 필요한 정보 골라내기
     movie_list = movie_dict.get('results')
     for movie in movie_list:
-        title = movie.get('original_title')
+        title = movie.get('title')
         overview = movie.get('overview')
         release_date = movie.get('release_date')
-        poster_path = movie.get('poster_path')
+        poster_path = 'https://image.tmdb.org/t/p/w500' + movie.get('poster_path')
         popularity = movie.get('popularity')
 
         # DB에 저장하기, 중복제거
@@ -119,7 +119,7 @@ def create_movies(request):
             'model': "movies.movie",
             # 'pk': len(results) + 1,
             "fields": {
-            'poster_path': 'https://image.tmdb.org/t/p/w500' +  poster_path,
+            'poster_path': poster_path,
             'title': title,
             'overview': overview,
             'release_date': release_date,
@@ -137,10 +137,10 @@ def create_movies(request):
     # 필요한 정보 골라내기
     movie_list = movie_dict.get('results')
     for movie in movie_list:
-        title = movie.get('original_title')
+        title = movie.get('title')
         overview = movie.get('overview')
         release_date = movie.get('release_date')
-        poster_path = movie.get('poster_path')
+        poster_path = 'https://image.tmdb.org/t/p/w500' +  movie.get('poster_path')
         popularity = movie.get('popularity')
 
         # DB에 저장하기, 중복제거
@@ -150,7 +150,7 @@ def create_movies(request):
             'model': "movies.movie",
             # 'pk': len(results) + 1,
             "fields": {
-            'poster_path': 'https://image.tmdb.org/t/p/w500' +  poster_path,
+            'poster_path': poster_path,
             'title': title,
             'overview': overview,
             'release_date': release_date,
@@ -167,10 +167,10 @@ def create_movies(request):
     # 필요한 정보 골라내기
     movie_list = movie_dict.get('results')
     for movie in movie_list:
-        title = movie.get('original_title')
+        title = movie.get('title')
         overview = movie.get('overview')
         release_date = movie.get('release_date')
-        poster_path = movie.get('poster_path')
+        poster_path = 'https://image.tmdb.org/t/p/w500' + movie.get('poster_path')
         popularity = movie.get('popularity')
 
         # DB에 저장하기, 중복제거
@@ -180,7 +180,7 @@ def create_movies(request):
             'model': "movies.movie",
             # 'pk': len(results) + 1,
             "fields": {
-            'poster_path': 'https://image.tmdb.org/t/p/w500' +  poster_path,
+            'poster_path': poster_path,
             'title': title,
             'overview': overview,
             'release_date': release_date,

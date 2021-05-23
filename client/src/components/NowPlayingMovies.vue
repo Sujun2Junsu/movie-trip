@@ -13,7 +13,7 @@
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="8" aria-label="Slide 9"></button>
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="9" aria-label="Slide 10"></button>
     </div>
-    <div class="carousel-inner mh-100" style="width: 100%; height: 600px; background-color: black;">
+    <div class="carousel-inner mh-100" style="width: 100%; height: 600px; background-color: #070B19;">
       <p style="color: white;">Now Playing</p>
       <span class="carousel-item active">
           <img :src="this.firstNowPlayingMoviePic" class="m-0" style="height: 550px; padding-bottom: 25px;" alt="이미지를 불러올 수 없습니다.">
