@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'rest_framework.authtoken',
     # 'rest_auth',
-    'allauth',
-    'allauth.account',
+    # 'allauth',
+    # 'allauth.account',
     # 'allauth.socialaccount',
     # 'allauth.socialaccount.providers.google',
 

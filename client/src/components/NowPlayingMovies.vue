@@ -56,7 +56,7 @@ export default {
   methods: {
     getNowPlayingMovies: function () {
       axios({
-        method: 'get',
+        method: 'get',// movie_list
         url: `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=ko-KR&page=1`
       })
         .then(res => {
@@ -64,19 +64,6 @@ export default {
           this.nowPlayingMovies = allNowPlayingMovies.slice(1,10)
           // carousel의 첫번째 아이템의 class에만 active를 붙이기 위해 따로 떼어냄
           this.firstNowPlayingMoviePic = `https://image.tmdb.org/t/p/w500${allNowPlayingMovies[0].poster_path}`
-          
-          // DB에 없는 영화라면 자동으로 DB에 등록되게 함
-          axios({
-            method: 'post',
-            url: 'http://127.0.0.1:8000/movies/auto-create-movies/',
-            data: allNowPlayingMovies
-          })
-          .then(res => {
-            console.log(res)
-          })
-          .catch(err => {
-            console.log(err)
-          })
         })
         .catch(err => {
           console.log(err)
