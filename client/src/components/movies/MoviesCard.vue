@@ -1,5 +1,5 @@
 <template>
-  <div class="col">
+  <div class="col" @click="goMovieDetail">
     <div class="card">
       <img :src="movie.poster_path" class="card-img-top" :alt="movie.title">
       <div class="card-body">
@@ -16,6 +16,11 @@ export default {
     movie: {
       type: Object
     }
+  },
+  methods: {
+    goMovieDetail: function () {
+      this.$router.push({ name: 'MovieDetail', params: { movieTitle: this.movie.title }})
+    },
   }
 }
 </script>
