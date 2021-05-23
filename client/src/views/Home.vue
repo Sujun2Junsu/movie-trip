@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import NowPlayingMovies from '@/components/NowPlayingMovies'
-import PopularMovies from '@/components/PopularMovies'
-import HighRatingMovies from '@/components/HighRatingMovies'
+import NowPlayingMovies from '@/components/movies/NowPlayingMovies'
+import PopularMovies from '@/components/movies/PopularMovies'
+import HighRatingMovies from '@/components/movies/HighRatingMovies'
 
 export default {
   name: 'Home',

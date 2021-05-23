@@ -38,7 +38,7 @@
 <script>
 import axios from 'axios'
 
-import NowPlayingMoviesItem from'@/components/NowPlayingMoviesItem'
+import NowPlayingMoviesItem from'@/components/movies/NowPlayingMoviesItem'
 
 const API_KEY = '4dc86c92c350c5edac0c712116558e11'
 
