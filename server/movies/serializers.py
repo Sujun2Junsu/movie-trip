@@ -22,7 +22,7 @@ class ReviewSerializer(serializers.ModelSerializer):
   class Meta:
     model = Review
     fields = '__all__'
-    read_only_fields = ('user', 'movie',)
+    read_only_fields = ('user',)
 
 
 class CommentListSerializer(serializers.ModelSerializer):

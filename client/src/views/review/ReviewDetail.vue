@@ -1,6 +1,12 @@
 <template>
   <div class="container" v-if="review">
-    <h5 class="text-white">&lt; {{ movieTitle }} &gt; : {{ review.title }}</h5>
+    <div class="row align-items-center">
+      <h5 class="text-white col-8 offset-2 align-self-center">&lt; {{ movieTitle }} &gt; : {{ review.title }}</h5>
+      <span class="col-2">
+        <button @click="goUpdateReview()">수정</button>
+        <button @click="deleteReview()">삭제</button>
+      </span>
+    </div>
     <div class="row justify-content-around">
       <div class="col">작성자: {{ userName }}</div>
       <div class="col">등록: {{ createdTime }}</div>
@@ -8,6 +14,7 @@
     </div>
     <hr>
     <p class="text-white">{{ review.content }}</p>
+    <hr>
   </div>
 
 </template>
@@ -25,9 +32,17 @@ export default {
       review: null,
       userName: null,
       movieTitle: null,
+      is_same_user: null,
     }
   },
   methods: {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
     getReviewDetail: function (){
       // console.log(this.reviewId)
       axios({
@@ -55,6 +70,33 @@ export default {
           console.log(err)
         })
     },
+    deleteReview: function () {
+      axios({
+        method: 'delete',
+        url: `http://127.0.0.1:8000/movies/review/${this.reviewId}/`,
+        headers: this.setToken()
+      })
+        .then((res) => {
+          console.log(res)
+          this.$router.push({ name: 'MovieDetailById', params: { movieId: this.movieId }})
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    goUpdateReview: function () {
+      this.$router.push({ name: 'ReviewUpdateForm', params: { movieId: this.movieId, reviewId: this.reviewId }})
+    },
+    isSameUser: function () {
+      axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/movies/review-same-user/${this.reviewId}/`
+      })
+      .then(res => {
+        console.log('유저')
+        console.log(res)
+      })
+    }
   },
   computed: {
     createdTime: function () {
@@ -67,6 +109,7 @@ export default {
   },
   created: function () {
     this.getReviewDetail()
+    this.isSameUser()
   }
 }
 </script>

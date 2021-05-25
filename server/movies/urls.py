@@ -6,11 +6,13 @@ app_name="movies"
 
 urlpatterns = [
     path('create-movies/', tmdb.create_movies),
-    path('movie-list/', views.movie_list, name='movie_list'),
-    path('movie/<str:movie_title>/', views.movie_detail, name='movie_detail'),
-    path('movie-detail/<int:movie_pk>/', views.movie_detail_by_pk, name='movie_detail_by_pk'),
-    path('movie-detail/<int:movie_pk>/review-list/', views.review_list, name='review_list'),
-    path('review-detail/<int:review_pk>/', views.review_detail, name='review_detail'),
+    path('movie-list/', views.movie_list),
+    path('movie/<str:movie_title>/', views.movie_detail),
+    path('movie-detail/<int:movie_pk>/', views.movie_detail_by_pk),
+    path('movie-detail/<int:movie_pk>/review-list/', views.review_list),
+    path('review-detail/<int:review_pk>/', views.review_detail),
+    path('review/<int:review_pk>/', views.review_update_delete),
+    # path('review-same-user/<int:review_pk>/', views.review_same_user),
 ]
 
 
