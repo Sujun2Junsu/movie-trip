@@ -10,6 +10,7 @@ urlpatterns = [
     path('movie/<str:movie_title>/', views.movie_detail, name='movie_detail'),
     path('movie-detail/<int:movie_pk>/', views.movie_detail_by_pk, name='movie_detail_by_pk'),
     path('movie-detail/<int:movie_pk>/review-list/', views.review_list, name='review_list'),
+    path('review-detail/<int:review_pk>/', views.review_detail, name='review_detail'),
 ]
 
 

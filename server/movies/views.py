@@ -52,6 +52,13 @@ def review_list(request, movie_pk):
       return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
+@api_view(['GET'])
+def review_detail(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    serializer = ReviewListSerializer(review)
+    return Response(serializer.data)
+
+
 # @api_view(['GET'])
 # @authentication_classes([JSONWebTokenAuthentication])
 # @permission_classes([IsAuthenticated])

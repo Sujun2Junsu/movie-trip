@@ -7,6 +7,7 @@
       v-for="(review, idx) in reviewList"
       :key="idx"
       :review="review"
+      :movieId="movieId"
     />
   </div>
 </template>

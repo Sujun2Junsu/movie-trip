@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div v-if="review">
     <hr>
-    <span>{{ review.title }}</span>
-    <span>{{ review.created_at }}</span>
+    <div @click="goReviewDetail">
+      <span>{{ review.title }}</span>
+      <span>{{ review.created_at }}</span>
+    </div>
   </div>
 </template>
 
@@ -12,6 +14,11 @@ export default {
   props: {
     review: {
       type: Object,
+    },
+  },
+  methods: {
+    goReviewDetail: function () {
+      this.$router.push({ name: 'ReviewDetail', params: { reviewId: this.review.id }})
     }
   }
 }
