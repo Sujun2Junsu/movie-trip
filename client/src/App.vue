@@ -6,9 +6,6 @@
           <li class="nav-item">
             <router-link @click.native="logout" to="#">Logout</router-link>
           </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'Review' }">Review</router-link>
-          </li>
         </ul>       
         <ul class="nav justify-content-center">
           <li class="nav-item">

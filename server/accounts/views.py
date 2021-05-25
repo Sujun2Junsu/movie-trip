@@ -1,7 +1,10 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
 from .serializers import UserSerializer
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 
@@ -38,3 +41,9 @@ def signup(request):
 #         }
 #         return Response(response, status=status.HTTP_200_OK)
 
+
+@api_view(['GET'])
+def user_detail(request, user_pk):
+    user = get_object_or_404(get_user_model(), pk=user_pk)
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
