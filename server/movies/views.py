@@ -32,10 +32,9 @@ def movie_detail_by_pk(request, movie_pk):
     
   
 ### review
-
 @api_view(['GET', 'POST'])
-# @authentication_classes([JSONWebTokenAuthentication])
-# @permission_classes([IsAuthenticated])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def review_list(request, movie_pk):
   if request.method == 'GET':
     reviews = Review.objects.all().filter(movie_id=movie_pk)
@@ -44,6 +43,7 @@ def review_list(request, movie_pk):
   else:
     serializer = ReviewSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
+      
       movie = get_object_or_404(Movie, pk=request.data.get('movie'))
       movie.save()
       serializer.save(user=request.user)
@@ -55,6 +55,38 @@ def review_detail(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     serializer = ReviewSerializer(review)
     return Response(serializer.data)
+
+
+@api_view(['PUT', 'DELETE'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def review_update_delete(request, review_pk):
+  review = get_object_or_404(Review, pk=review_pk)
+
+  if not request.user.user_reviews.filter(pk=review_pk).exists():
+    return Response({'message': '권한이 없습니다.'})
+
+  if request.method == 'PUT':
+    serializer = ReviewSerializer(review, data=request.data)
+    
+    if serializer.is_valid(raise_exception=True):
+      movie = get_object_or_404(Movie, pk=request.data.get('movie'))
+      movie.save()
+      serializer.save(user=request.user)
+      return Response(serializer.data)
+
+  elif request.method == 'DELETE':
+    review.delete()
+    return Response({ 'id': review_pk }, status=status.HTTP_204_NO_CONTENT)
+
+
+# @api_view(['GET'])
+# # 로그인한 유저가 리뷰 작성 유저인지 확인하는 용도
+# def review_same_user(request, review_pk):
+#   if not request.user.user_reviews.filter(pk=review_pk).exists():
+#     return Response({'message': '권한이 없습니다.'})
+#   return Response({'message': '권한이 있습니다.'})
+
 
 
 # @api_view(['GET'])
@@ -77,23 +109,6 @@ def review_detail(request, review_pk):
 #     serializer.save(user=request.user, review=review)
 #     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-
-# @api_view(['PUT', 'DELETE'])
-# @authentication_classes([JSONWebTokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# def review_update_delete(request, review_pk):
-#   review = get_object_or_404(Review, pk=review_pk)
-#   if not request.user.reviews.filter(pk=review_pk).exists():
-#     return Response({'message': '권한이 없습니다.'})
-
-#   if request.method == 'PUT':
-#     serializer = ReviewSerializer(review, data=request.data)
-    
-#     if serializer.is_valid(raise_exception=True):
-#       movie = get_object_or_404(Movie, pk=request.data.get('movie'))
-#       movie.save()
-#       serializer.save(user=request.user)
-#       return Response(serializer.data)
 
 #   else:
 #     review = get_object_or_404(Review, pk=review_pk)

@@ -4,10 +4,12 @@ import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import Movies from '@/views/movies/Movies'
 import MovieDetail from '@/views/movies/MovieDetail'
+import MovieDetailById from '@/views/movies/MovieDetailById'
 import Home from '@/views/Home.vue'
 import ReviewList from '@/views/review/ReviewList'
 import ReviewDetail from '@/views/review/ReviewDetail'
 import ReviewForm from '@/components/reviews/ReviewForm'
+import ReviewUpdateForm from '@/components/reviews/ReviewUpdateForm'
 
 
 
@@ -40,6 +42,11 @@ const routes = [
     component: MovieDetail
   },
   {
+    path: '/movies2/:movieId',
+    name: 'MovieDetailById',
+    component: MovieDetailById
+  },
+  {
     path: '/review-list/:movieId',
     name: 'ReviewList',
     component: ReviewList
@@ -54,7 +61,11 @@ const routes = [
     name: 'ReviewForm',
     component: ReviewForm
   },
-
+  {
+    path: '/review-update-form/:movieId/:reviewId',
+    name: 'ReviewUpdateForm',
+    component: ReviewUpdateForm
+  },
 ]
 
 const router = new VueRouter({

@@ -4,33 +4,60 @@
     <hr>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label row justify-content-start"> - 제목</label>
-      <input type="input" class="form-control" id="exampleFormControlInput1">
+      <input type="input" class="form-control" id="exampleFormControlInput1" v-model="reviewTitle">
     </div>
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label row justify-content-start"> -  내용</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" v-model="reviewContent"></textarea>
     </div>
-    <!--   
-    model = Review
-    fields = '__all__'
-    read_only_fields = ('user', 'movie',) 
-    
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_reviews")
-    title = models.CharField(max_length=100)
-    content = models.TextField()
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    content, title
-    movie, user는 어디서 받아오기
-    -->
+    <button @click="createReview">Add</button>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'ReviewForm',
+  data: function (){
+    return {
+      reviewTitle: null,
+      reviewContent: null,
+      movieId: this.$route.params.movieId,
+    }
+  },
+  methods: {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+          Authorization: `JWT ${token}`
+      }
+      return config
+    },
+    createReview: function () {
+      const reviewItem = {
+        title: this.reviewTitle,
+        content: this.reviewContent,
+        movie: this.movieId
+      }
+      if (reviewItem.title && reviewItem.content && reviewItem.title.trim() && reviewItem.content.trim()) {
+        console.log('성공')
+        axios({
+          method: 'post',
+          url: `http://127.0.0.1:8000/movies/movie-detail/${this.movieId}/review-list/`,
+          data: reviewItem,
+          headers: this.setToken()
+        })
+          .then(res => {
+            console.log(res)
+            this.$router.push({ name: 'MovieDetailById', params: { movieId: this.movieId }})
+          })
+      } else {
+        console.log('값이 없습니다.')
+      }
+      
+    }
+  }
 }
 </script>
 
