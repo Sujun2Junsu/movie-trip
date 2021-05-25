@@ -16,7 +16,7 @@
     <div class="carousel-inner mh-100" style="width: 100%; height: 600px; background-color: #070B19;">
       <p style="color: white;">Now Playing</p>
       <span class="carousel-item active">
-          <img :src="this.firstNowPlayingMoviePic" class="m-0" style="height: 550px; padding-bottom: 25px;" alt="이미지를 불러올 수 없습니다.">
+          <img @click="goMovieDetail" :src="this.firstNowPlayingMoviePic" class="m-0" style="height: 550px; padding-bottom: 25px;" alt="이미지를 불러올 수 없습니다.">
       </span>
       <NowPlayingMoviesItem
         v-for="(movie, idx) in nowPlayingMovies"
@@ -40,12 +40,11 @@ import axios from 'axios'
 
 import NowPlayingMoviesItem from'@/components/movies/NowPlayingMoviesItem'
 
-const API_KEY = '4dc86c92c350c5edac0c712116558e11'
-
 export default {
   name: 'NowPlayingMovies',
   data: function () {
     return {
+      firstNowPlayingMovie: null,
       firstNowPlayingMoviePic: null,
       nowPlayingMovies: null,
     }
@@ -55,6 +54,9 @@ export default {
   },
   methods: {
     getNowPlayingMovies: function () {
+
+      const API_KEY = process.env.VUE_APP_TMDB_API_KEY
+
       axios({
         method: 'get',// movie_list
         url: `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=ko-KR&page=1`
@@ -63,11 +65,15 @@ export default {
           const allNowPlayingMovies = res.data.results
           this.nowPlayingMovies = allNowPlayingMovies.slice(1,10)
           // carousel의 첫번째 아이템의 class에만 active를 붙이기 위해 따로 떼어냄
-          this.firstNowPlayingMoviePic = `https://image.tmdb.org/t/p/w500${allNowPlayingMovies[0].poster_path}`
+          this.firstNowPlayingMovie = allNowPlayingMovies[0]
+          this.firstNowPlayingMoviePic = `https://image.tmdb.org/t/p/w500/${allNowPlayingMovies[0].poster_path}`
         })
         .catch(err => {
           console.log(err)
         })
+    },
+    goMovieDetail: function () {
+      this.$router.push({ name: 'MovieDetail', params: { movieTitle: this.firstNowPlayingMovie.title }})
     },
   },
   created: function () {
