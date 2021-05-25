@@ -1,14 +1,31 @@
 <template>
   <div v-if="movie">
-    <h1>{{ movie.title }} 리뷰 목록</h1>
-    <hr>
-    <button>리뷰 작성</button>
-    <ReviewListItem
-      v-for="(review, idx) in reviewList"
-      :key="idx"
-      :review="review"
-      :movieId="movieId"
-    />
+    <div class="container">
+      <div class="row align-items-center">
+        <span class="col-8 offset-2 align-self-center"><h5 class="text-white mb-0">영화리뷰</h5></span>
+        <span class="col-2"><button @click="goReviewForm">글 작성</button></span>
+      </div>
+      <br>
+      <div class="d-lg-block col-lg-12"> 
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr class="text-white">
+              <th scope="col">리뷰 제목</th>
+              <th scope="col">작성자</th>
+              <th scope="col">작성 시간</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ReviewListItem
+              v-for="(review, idx) in reviewList"
+              :key="idx"
+              :review="review"
+              :movieId="movieId"
+            />
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -21,11 +38,15 @@ export default {
   name: 'Review',
   data: function () {
     return {
-      movieId: this.$route.params.movieId,
       movie: null,
       reviewList: null,
     }
-  }, 
+  },
+  props: {
+    movieId: {
+      type: Number,
+    },
+  },
   components: {
     ReviewListItem
   },
@@ -45,9 +66,12 @@ export default {
         url: `http://127.0.0.1:8000/movies/movie-detail/${this.movieId}/review-list/`
       })
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.reviewList = res.data
       })
+    },
+    goReviewForm: function () {
+      this.$router.push({ name: 'ReviewForm' })
     }
   //   setToken: function () {
   //     const token = localStorage.getItem('jwt')

@@ -1,40 +1,41 @@
 <template>
   <div class="container">
     <div class="row" v-if="movie">
-      <router-link class="col align-self-start" :to="{ name: 'Movies' }">[전체영화 보기]</router-link>
-      <hr class="movie-card">
+      <span class="col-3 align-self-start"><router-link :to="{ name: 'Movies' }">[전체영화 보기]</router-link></span>
+      <div class="movie-title row align-items-center justify-content-around">
+        <span class="col"><h4 class="text-white mb-0">{{ movie.title }}</h4></span>
+        <span class="col"><button>찜</button></span>
+      </div>
       <br>
-      <span class="h5 text-white">{{ movie.title }}</span>
-      <br><br>
-      <hr>
       <div class="col-lg-4">
         <div>
           <img :src="movie.poster_path" alt="포스터" style="width: 100%">
         </div>
       </div>
-      <div class="col-lg-8">
+      <div class="col-lg-7 offset-lg-1">
         <div>
-          <div>
-            <div class="video-wrap" v-if="relatedVideoUrl">
-              <iframe :src="relatedVideoUrl" frameborder="1"></iframe>
-            </div>
+          <div class="video-wrap" v-if="relatedVideoUrl">
+            <iframe :src="relatedVideoUrl" frameborder="1"></iframe>
           </div>
           <div>
             <p class="text-white-50 text-start">{{ movie.overview }}</p>
           </div>
         </div>
-        <div>
-        </div>
       </div>
     </div>
     <hr>
-    <button @click="goReview">Review</button>
-    <button>찜</button>
+    <div v-if="movie">
+      <ReviewList
+        :movieId="movie.id"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+
+import ReviewList from '@/views/review/ReviewList'
 
 export default {
   name: "MovieDetail",
@@ -44,6 +45,9 @@ export default {
       movie: null,
       relatedVideoUrl: null,
     }
+  },
+  components: {
+    ReviewList,
   },
   methods: {
     getMovieDetail: function () {
@@ -78,9 +82,6 @@ export default {
           console.log(err)
         }) 
     },
-    goReview: function () {
-      this.$router.push({ name: 'Review', params: { movieId: this.movie.id }})
-    }
   },
   created: function () {
     this.getMovieDetail()
@@ -89,14 +90,11 @@ export default {
 </script>
 
 <style>
-  /* 영화 카드 구분선 */
-  .movie-card {
-    border-style: inset;
-    border-width:2px;
-    border-radius: 10px;    
-    padding: 3px;
-    border-color:#a64d5d;
-    background: white;
+  .movie-title {
+    border: 0.1px solid gray;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
   }
 
   /* 트레일러 영상 반응형으로 만드는 css코드 */

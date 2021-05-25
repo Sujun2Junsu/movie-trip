@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     # 'allauth.account',
     # 'allauth.socialaccount',
     # 'allauth.socialaccount.providers.google',
-
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',

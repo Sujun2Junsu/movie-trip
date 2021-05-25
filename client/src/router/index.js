@@ -5,8 +5,9 @@ import Login from '@/views/accounts/Login'
 import Movies from '@/views/movies/Movies'
 import MovieDetail from '@/views/movies/MovieDetail'
 import Home from '@/views/Home.vue'
-import Review from '@/views/review/Review'
+import ReviewList from '@/views/review/ReviewList'
 import ReviewDetail from '@/views/review/ReviewDetail'
+import ReviewForm from '@/components/reviews/ReviewForm'
 
 
 
@@ -39,15 +40,21 @@ const routes = [
     component: MovieDetail
   },
   {
-    path: '/review/:movieId',
-    name: 'Review',
-    component: Review
+    path: '/review-list/:movieId',
+    name: 'ReviewList',
+    component: ReviewList
   },
   {
-    path: '/review-detail/:reviewId',
+    path: '/review-detail/:movieId/:reviewId',
     name: 'ReviewDetail',
     component: ReviewDetail
   },
+  {
+    path: '/review-form/',
+    name: 'ReviewForm',
+    component: ReviewForm
+  },
+
 ]
 
 const router = new VueRouter({

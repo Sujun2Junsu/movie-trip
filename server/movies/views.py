@@ -8,7 +8,7 @@ import requests
 from django.shortcuts import get_object_or_404, render, redirect, get_list_or_404
 from .models import Movie, Review
 # from django.contrib.auth import get_user_model
-from .serializers import MovieListSerializer, MovieSerializer, ReviewListSerializer, CommentListSerializer
+from .serializers import MovieListSerializer, MovieSerializer, ReviewSerializer, CommentListSerializer
 
 @api_view(['GET'])
 def movie_list(request):
@@ -39,15 +39,13 @@ def movie_detail_by_pk(request, movie_pk):
 def review_list(request, movie_pk):
   if request.method == 'GET':
     reviews = Review.objects.all().filter(movie_id=movie_pk)
-    serializer = ReviewListSerializer(reviews, many=True)
+    serializer = ReviewSerializer(reviews, many=True)
     return Response(serializer.data)
   else:
-    serializer = ReviewListSerializer(data=request.data)
+    serializer = ReviewSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
       movie = get_object_or_404(Movie, pk=request.data.get('movie'))
-
       movie.save()
-        
       serializer.save(user=request.user)
       return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -55,7 +53,7 @@ def review_list(request, movie_pk):
 @api_view(['GET'])
 def review_detail(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
-    serializer = ReviewListSerializer(review)
+    serializer = ReviewSerializer(review)
     return Response(serializer.data)
 
 
@@ -89,7 +87,7 @@ def review_detail(request, review_pk):
 #     return Response({'message': '권한이 없습니다.'})
 
 #   if request.method == 'PUT':
-#     serializer = ReviewListSerializer(review, data=request.data)
+#     serializer = ReviewSerializer(review, data=request.data)
     
 #     if serializer.is_valid(raise_exception=True):
 #       movie = get_object_or_404(Movie, pk=request.data.get('movie'))

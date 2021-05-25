@@ -8,4 +8,5 @@ urlpatterns = [
     path('signup/', views.signup),
     # path('login/', views.login),
     path('api-token-auth/', obtain_jwt_token),
+    path('user-detail/<int:user_pk>/', views.user_detail),
 ]
