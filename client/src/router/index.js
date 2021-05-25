@@ -5,7 +5,7 @@ import Login from '@/views/accounts/Login'
 import Movies from '@/views/movies/Movies'
 import MovieDetail from '@/views/movies/MovieDetail'
 import Home from '@/views/Home.vue'
-import Review from '@/views/community/Review'
+import Review from '@/views/review/Review'
 
 
 
@@ -38,7 +38,7 @@ const routes = [
     component: MovieDetail
   },
   {
-    path: '/community',
+    path: '/review/:movieId',
     name: 'Review',
     component: Review
   },
