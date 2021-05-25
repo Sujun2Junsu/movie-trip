@@ -15,6 +15,7 @@ def create_movies(request):
     # 필요한 정보 골라내기
     movie_list = movie_dict.get('results')
     for movie in movie_list:
+        movie_id = movie.get('id')
         title = movie.get('title')
         overview = movie.get('overview')
         release_date = movie.get('release_date')
@@ -22,12 +23,13 @@ def create_movies(request):
         popularity = movie.get('popularity')
 
         # DB에 저장하기, 중복제거
-        (movie, created) = Movie.objects.get_or_create(title=title, overview=overview, release_date=release_date, poster_path=poster_path, popularity=popularity)
+        (movie, created) = Movie.objects.get_or_create(movie_id=movie_id, title=title, overview=overview, release_date=release_date, poster_path=poster_path, popularity=popularity)
 
         result = {
             'model': "movies.movie",
             # 'pk': len(results) + 1,
             "fields": {
+            'movie_id': movie_id,
             'poster_path': poster_path,
             'title': title,
             'overview': overview,
@@ -45,6 +47,7 @@ def create_movies(request):
     # 필요한 정보 골라내기
     movie_list = movie_dict.get('results')
     for movie in movie_list:
+        movie_id = movie.get('id')
         title = movie.get('title')
         overview = movie.get('overview')
         release_date = movie.get('release_date')
@@ -52,12 +55,13 @@ def create_movies(request):
         popularity = movie.get('popularity')
 
         # DB에 저장하기, 중복제거
-        (movie, created) = Movie.objects.get_or_create(title=title, overview=overview, release_date=release_date, poster_path=poster_path, popularity=popularity)
+        (movie, created) = Movie.objects.get_or_create(movie_id=movie_id, title=title, overview=overview, release_date=release_date, poster_path=poster_path, popularity=popularity)
 
         result = {
             'model': "movies.movie",
             # 'pk': len(results) + 1,
             "fields": {
+            'movie_id': movie_id,
             'poster_path': poster_path,
             'title': title,
             'overview': overview,
@@ -76,6 +80,7 @@ def create_movies(request):
     # 필요한 정보 골라내기
     movie_list = movie_dict.get('results')
     for movie in movie_list:
+        movie_id = movie.get('id')
         title = movie.get('title')
         overview = movie.get('overview')
         release_date = movie.get('release_date')
@@ -83,12 +88,13 @@ def create_movies(request):
         popularity = movie.get('popularity')
 
         # DB에 저장하기, 중복제거
-        (movie, created) = Movie.objects.get_or_create(title=title, overview=overview, release_date=release_date, poster_path=poster_path, popularity=popularity)
+        (movie, created) = Movie.objects.get_or_create(movie_id=movie_id, title=title, overview=overview, release_date=release_date, poster_path=poster_path, popularity=popularity)
 
         result = {
             'model': "movies.movie",
             # 'pk': len(results) + 1,
             "fields": {
+            'movie_id': movie_id,
             'poster_path': poster_path,
             'title': title,
             'overview': overview,
@@ -106,6 +112,7 @@ def create_movies(request):
     # 필요한 정보 골라내기
     movie_list = movie_dict.get('results')
     for movie in movie_list:
+        movie_id = movie.get('id')
         title = movie.get('title')
         overview = movie.get('overview')
         release_date = movie.get('release_date')
@@ -113,12 +120,13 @@ def create_movies(request):
         popularity = movie.get('popularity')
 
         # DB에 저장하기, 중복제거
-        (movie, created) = Movie.objects.get_or_create(title=title, overview=overview, release_date=release_date, poster_path=poster_path, popularity=popularity)
+        (movie, created) = Movie.objects.get_or_create(movie_id=movie_id, title=title, overview=overview, release_date=release_date, poster_path=poster_path, popularity=popularity)
 
         result = {
             'model': "movies.movie",
             # 'pk': len(results) + 1,
             "fields": {
+            'movie_id': movie_id,
             'poster_path': poster_path,
             'title': title,
             'overview': overview,
@@ -137,6 +145,7 @@ def create_movies(request):
     # 필요한 정보 골라내기
     movie_list = movie_dict.get('results')
     for movie in movie_list:
+        movie_id = movie.get('id')
         title = movie.get('title')
         overview = movie.get('overview')
         release_date = movie.get('release_date')
@@ -144,12 +153,13 @@ def create_movies(request):
         popularity = movie.get('popularity')
 
         # DB에 저장하기, 중복제거
-        (movie, created) = Movie.objects.update_or_create(title=title, overview=overview, release_date=release_date, poster_path=poster_path, popularity=popularity)
+        (movie, created) = Movie.objects.update_or_create(movie_id=movie_id, title=title, overview=overview, release_date=release_date, poster_path=poster_path, popularity=popularity)
         
         result = {
             'model': "movies.movie",
             # 'pk': len(results) + 1,
             "fields": {
+            'movie_id': movie_id,
             'poster_path': poster_path,
             'title': title,
             'overview': overview,
@@ -167,6 +177,7 @@ def create_movies(request):
     # 필요한 정보 골라내기
     movie_list = movie_dict.get('results')
     for movie in movie_list:
+        movie_id = movie.get('id')
         title = movie.get('title')
         overview = movie.get('overview')
         release_date = movie.get('release_date')
@@ -174,12 +185,13 @@ def create_movies(request):
         popularity = movie.get('popularity')
 
         # DB에 저장하기, 중복제거
-        (movie, created) = Movie.objects.update_or_create(title=title, overview=overview, release_date=release_date, poster_path=poster_path, popularity=popularity)
+        (movie, created) = Movie.objects.update_or_create(movie_id=movie_id, title=title, overview=overview, release_date=release_date, poster_path=poster_path, popularity=popularity)
         
         result = {
             'model': "movies.movie",
             # 'pk': len(results) + 1,
             "fields": {
+            'movie_id': movie_id,
             'poster_path': poster_path,
             'title': title,
             'overview': overview,
