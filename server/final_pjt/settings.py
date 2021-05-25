@@ -33,9 +33,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'accounts',
-    'community',
     'movies',
     'rest_framework',
+    'django_seed',
     # 'rest_framework.authtoken',
     # 'rest_auth',
     'allauth',

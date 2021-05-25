@@ -28,7 +28,7 @@
       </div>
     </div>
     <hr>
-    <button>Review</button>
+    <button @click="goReview">Review</button>
     <button>찜</button>
   </div>
 </template>
@@ -78,6 +78,9 @@ export default {
           console.log(err)
         }) 
     },
+    goReview: function () {
+      this.$router.push({ name: 'Review', params: { movieId: this.movie.id }})
+    }
   },
   created: function () {
     this.getMovieDetail()
