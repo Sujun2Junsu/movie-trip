@@ -1,83 +1,75 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_GET, require_POST, require_http_methods
+
+from movies.models import Movie
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from django.shortcuts import get_list_or_404, get_object_or_404
 from .models import Review, Comment
-from .forms import ReviewForm, CommentForm
-from django.http import JsonResponse, HttpResponse
+from .serializers import ReviewSerializer, CommentSerializer
 
 
-@require_GET
-def index(request):
-    reviews = Review.objects.order_by('-pk')
-    context = {
-        'reviews': reviews,
-    }
-    return render(request, 'community/index.html', context)
+# Create your views here.
+# @api_view(['GET'])
+# def movie_list(request):
+#     movies = get_list_or_404(Movie)
+#     serializer = MovieListSerializer(movies, many=True)
+#     return Response(serializer.data)
+
+# @api_view(['GET', 'DELETE', 'PUT'])
+# def movie_detail(request, movie_pk):
+#     movie = get_object_or_404(Movie, pk=movie_pk)
+#     if request.method == 'GET':
+#         serializer = MovieSerializer(movie)
+#         return Response(serializer.data)
 
 
-@require_http_methods(['GET', 'POST'])
-def create(request):
-    if request.method == 'POST':
-        form = ReviewForm(request.POST) 
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.user = request.user
-            review.save()
-            return redirect('community:detail', review.pk)
-    else:
-        form = ReviewForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'community/create.html', context)
-
-
-@require_GET
-def detail(request, review_pk):
+@api_view(['GET'])
+def review_list(request):
+    reviews = get_list_or_404(Review)
+    serializer = ReviewSerializer(reviews, many=True)
+    return Response(serializer.data)
+    
+    
+@api_view(['GET', 'DELETE', 'PUT'])
+def review_detail(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
-    comments = review.comment_set.all()
-    comment_form = CommentForm()
-    context = {
-        'review': review,
-        'comment_form': comment_form,
-        'comments': comments,
-    }
-    return render(request, 'community/detail.html', context)
+    if request.method == 'GET':
+        serializer = ReviewSerializer(review)
+        return Response(serializer.data)
 
-
-@require_POST
-def create_comment(request, review_pk):
-    review = get_object_or_404(Review, pk=review_pk)
-    comment_form = CommentForm(request.POST)
-    if comment_form.is_valid():
-        comment = comment_form.save(commit=False)
-        comment.review = review
-        comment.user = request.user
-        comment.save()
-        return redirect('community:detail', review.pk)
-    context = {
-        'comment_form': comment_form,
-        'review': review,
-        'comments': review.comment_set.all(),
-    }
-    return render(request, 'community/detail.html', context)
-
-
-@require_POST
-def like(request, review_pk):
-    if request.user.is_authenticated:
-        review = get_object_or_404(Review, pk=review_pk)
-        user = request.user
-
-        if review.like_users.filter(pk=user.pk).exists():
-            review.like_users.remove(user)
-            liked = False
-        else:
-            review.like_users.add(user)
-            liked = True
-        liked_status = {
-            'liked': liked,
-            'count': review.like_users.count()
+    elif request.method == 'DELETE':
+        review.delete()
+        data = {
+            'delete': f'{review_pk} 번 리뷰가 삭제되었습니다.'
         }
-        return JsonResponse(liked_status)
-        # return redirect('community:index')
-    return HttpResponse(status=401)
+        return Response(data, status=status.HTTP_204_NO_CONTENT)
+
+    elif request.method == 'PUT':
+        serializer = ReviewSerializer(review, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+
+@api_view(['POST'])
+def review_create(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    serializer = ReviewSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(movie=movie)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+def comment_list(request):
+    comments = get_list_or_404(Comment)
+    serializer = CommentSerializer(comments, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def comment_create(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    serializer = CommentSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(review=review)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
