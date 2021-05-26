@@ -1,84 +1,83 @@
 <template>
   <div id="app">
     <div id="nav">
-      <span v-if="isLogin">
-        <ul class="nav justify-content-end">
+      <nav class="navbar navbar-expand-md navbar-dark bg-#2c3e50" style="height: 80px;">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
           <li class="nav-item">
-            <router-link @click.native="logout" to="#">Logout</router-link>
+            <router-link :to="{ name: 'Home'}">
+              <img src="@/assets/logo.png" style="width:300px">
+            </router-link>
           </li>
-        </ul>       
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <router-link :to="{ name: 'Home'}"><img src="@/assets/logo.png" style="width:300px"></router-link>
-          </li>
-        </ul>
-      </span>
-      <span v-else>
-        <ul class="nav justify-content-end">
-          <li class="nav-item">
-            <button @click="handleClickButton">Login</button>
-            <app-my-modal
-              :visible.sync="visible">
-            </app-my-modal>
-          </li>
-          <!-- <li class="nav-item">
-            <button @click="handleClickButton">Signup</button>
-            <signup-modal
-              :visible.sync="visible">
-            </signup-modal>
-            <router-link :to="{ name: 'Signup' }">Signup</router-link> -->
-          <!-- </li> -->
-        </ul>  
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <router-link :to="{ name: 'Home'}"><img src="@/assets/logo.png" style="width:300px"></router-link>
-          </li>
-        </ul>
-      </span>
+          <div class="collapse navbar-collapse container d-flex flex-row-reverse fs-5" id="navbarNav">
+            <span v-if="isLogin">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <router-link @click.native="logout" to="#" class="text-light nav-link active" text-decoration: none>Logout</router-link>
+                </li>
+              </ul>
+            </span>
+            <span v-else>
+              <ul class="navbar-nav gap-3">
+                <li class="nav-item">
+                  <a @click="handleClickButton" class="text-light nav-link">Login</a>
+                  <app-my-modal
+                    :visible.sync="visible">
+                  </app-my-modal>
+                </li>
+                <li class="nav-item me-3">
+                  <a @click="signupClickButton" class="text-light nav-link">Signup</a>
+                  <signup-modal
+                    :seen.sync="seen">
+                  </signup-modal>
+                </li>
+              </ul>
+            </span>
+          </div>
+        </div>
+      </nav>
     </div>
     <router-view @login="isLogin = true"/>
 
-    <!-- 아래는 하단 고정형 -->
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-      <div class="container text-center">
-        <small>Copyright &copy; 서울 4반 석정준 서민수</small>
-      </div>
+    <!-- 아래는 하단 고정형 완성 -->
+    <footer class="fixed-bottom d-flex justify-content-center align-items-center text-white-50 bg-dark py-2">
+      <p class="m-0">Copyright &copy; 서울 4반 석정준 서민수</p>
     </footer>
   </div>
 </template>
 
+
 <script>
 import myModal from '@/views/accounts/Login'
-// import myModal from '@/views/accounts/Signup'
-// import signupModal from '@/views/accounts/Signup'
+import signupModal from '@/views/accounts/Signup'
 
 export default {
   name: 'App',
   data: function () {
     return {
       isLogin: false,
-      visible: false
+      visible: false,
+      seen: false
     }
   },
   components: {
     appMyModal: myModal,
-    // signupModal: signupModal
+    signupModal: signupModal
   },
   methods: {
     logout: function () {
       this.isLogin = false
       localStorage.removeItem('jwt')
-      this.$router.push({ name: 'Login'})
+      this.$router.push({ name: 'Home'})
     },
-    // moveToLogin: function () {
-    //   this.$router.push({name: 'Login'})
-    // },
     handleClickButton(){
       this.visible = !this.visible
-    }
-    // signupClickButton(){
-    //   this.visible = !this.visible
-    // } 
+    },
+    signupClickButton(){
+      this.seen = !this.seen
+    } 
   },
   created: function () {
     const token = localStorage.getItem('jwt')
@@ -110,4 +109,15 @@ export default {
   color: #42b983;
 }
 
+.body {
+  background-color: black;
+  text-align: center;
+  z-index: 100;
+}
+
+.navbarNav {
+  z-index: 991;
+}
+
+a { text-decoration:none }
 </style>

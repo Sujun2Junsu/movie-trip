@@ -1,31 +1,35 @@
 <template>
   <div>
     <div class="Signup"
-    v-if="visible" @click.self="handleWrapperClick">
+    v-if="seen" @click.self="handleWrapperClick">
     <div class="signup-modal__dialog">
       <div class="modal-content">
       <header class="signup-modal__header">
-        <span>Signup</span>
+        <span class="modal-title">Signup</span>
+        <!-- 취소버튼은 나중에 위치 배치만 오른쪽 끝으로 하면 됨 -->
+        <!-- <button @click="$emit('update:seen', !seen)" type="button" class="btn-close justify-content-end" aria-label="Close"></button> -->
+        <!-- <div class="justify-content-center"><span>Signup</span></div>
+        <div class="justify-content-end"><button @click="$emit('update:seen', !seen)" type="button" class="btn-close" aria-label="Close">X</button></div> -->
       </header>
       <div class="signup-modal__body">
         <div>
-          <label for="username">사용자 이름 : </label>
-          <input type="text" class="form-control" id="username" v-model="credentials.username" placeholder="Username">
+          <label for="username">사용자 이름</label>
+          <input type="text" class="form-control" id="username" v-model="credentials2.username" placeholder="Username">
         </div>
         <div>
-          <label for="password">비밀번호 : </label>
-          <input type="password" class="form-control" id="password" v-model="credentials.password" placeholder="Password">
+          <label for="password">비밀번호</label>
+          <input type="password" class="form-control" id="password" v-model="credentials2.password" placeholder="Password">
         </div>
         <div>
-          <label for="passwordConfirmation">비밀번호 확인: </label>
-          <input type="password" class="form-control" id="passwordConfirmation" v-model="credentials.passwordConfirmation" placeholder="PasswordConfirmation">
+          <label for="passwordConfirmation">비밀번호 확인</label>
+          <input type="password" class="form-control" id="passwordConfirmation" v-model="credentials2.passwordConfirmation" placeholder="PasswordConfirmation">
         </div>
-        <button @click="signup(credentials)">Signup</button>
-        <!-- <button @click="$emit('update:visible', !visible)" type="button" class="btn btn-secondary">Close</button> -->
-        <!-- <div class="modal-footer">
-            <button @click="login" type="button" class="btn btn-primary" data-bs-dismiss="modal">Login</button>
-            <button @click="$emit('update:visible', !visible)" type="button" class="btn btn-secondary">Close</button>
-        </div> -->
+        <br>
+        <div class="modal-footer">
+          <!-- <button @click="signup(credentials)" type="button" class="btn btn-primary" data-bs-dismiss="modal">Signup</button> -->
+          <button @click="signup(credentials2)" type="button" class="btn btn-primary">Signup</button>
+          <button @click="$emit('update:seen', !seen)" type="button" class="btn btn-secondary">Close</button>
+        </div>
       </div>
     </div>
     </div>
@@ -39,7 +43,7 @@ import axios from 'axios'
 export default {
   name: 'Signup',
   props: {
-  visible: {
+  seen: {
     type: Boolean,
     require: true,
     default: false
@@ -51,7 +55,7 @@ export default {
   },
   data: function () {
     return {
-      credentials: {
+      credentials2: {
         username: null,
         password: null,
         passwordConfirmation: null,
@@ -63,18 +67,22 @@ export default {
       axios({
         method: 'post',
         url: 'http://127.0.0.1:8000/accounts/signup/',
-        data: this.credentials,        
+        data: this.credentials2,        
       })
         .then(res => {
           console.log(res)
-          this.$router.push({ name: 'Login'})           
+          // this.$router.push({ name: 'Login'})           
+          // this.$router.push({ name: 'my-modal'}) 
+          // location.replace('app-my-modal')   
+          location.reload()
+          // this.$router.push({ name: 'Home'})
         })
         .catch(err => {
           console.log(err)
         })
     },
     handleWrapperClick(){
-      this.$emit('update:visible', false)
+      this.$emit('update:seen', false)
       // this.$router.push({ name: '/Home'})   
     },
   }
@@ -95,10 +103,7 @@ $module: 'signup-modal';
   //This is modal layer
   &__dialog{
     z-index: 999;
-    // left: 50%;
-    // top: 75px;
     width: 600px;
-    // position: absolute;
     background: #fff;
     margin-bottom: 50px;
     // modal 가운데 등장하게 크기 상관없이
