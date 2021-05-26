@@ -1,25 +1,21 @@
 <template>
   <div class="container">
     <div class="row" v-if="movie">
-      <span class="col-3 align-self-start"><router-link :to="{ name: 'Movies' }">전체영화 보기</router-link></span>
-      <div class="movie-title row align-items-center justify-content-around">
-        <span class="col"><h4 class="text-white mb-0">{{ movie.title }}</h4></span>
-        <span class="col"><button>찜</button></span>
+      <span class="col-3 align-self-start"><router-link :to="{ name: 'Movies' }">[전체영화 보기]</router-link></span>
+      <div class="movie-title row align-items-center">
+        <span class="col"><h4 class="text-white mb-0">&lt;{{ movie.title }}&gt;</h4></span>
       </div>
       <br>
-      <div class="col-lg-4">
-        <div>
-          <img :src="movie.poster_path" alt="포스터" style="width: 100%">
-        </div>
+      <br>
+      <div class="col-lg-4 m-3">
+        <img :src="movie.poster_path" alt="포스터" style="width: 100%">
       </div>
-      <div class="col-lg-7 offset-lg-1">
-        <div>
-          <div class="video-wrap" v-if="relatedVideoUrl">
-            <iframe :src="relatedVideoUrl" frameborder="1"></iframe>
-          </div>
-          <div>
-            <p class="text-white-50 text-start">{{ movie.overview }}</p>
-          </div>
+      <div class="col-lg-7 mt-3">
+        <div class="video-wrap" v-if="relatedVideoUrl">
+          <iframe :src="relatedVideoUrl" frameborder="1"></iframe>
+        </div>
+        <div class="m-3">
+          <p class="text-white-50 text-start">{{ movie.overview }}</p>
         </div>
       </div>
     </div>
@@ -71,8 +67,6 @@ export default {
             url: `https://api.themoviedb.org/3/movie/${movie.movie_id}/videos?api_key=${API_KEY}&language=en-US`
           })
           .then(res => {
-            // console.log(res)
-            // console.log(res.data.results[0])
             if (res.data.results[0]) {
               this.relatedVideoUrl = 'https://www.youtube.com/embed/' + res.data.results[0].key
             }
@@ -91,8 +85,7 @@ export default {
 
 <style>
   .movie-title {
-    border: 0.1px solid gray;
-    border-radius: 10px;
+    background-color: #050813;
     padding: 10px;
     margin: 10px;
   }

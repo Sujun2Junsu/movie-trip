@@ -57,7 +57,7 @@ const routes = [
     component: ReviewDetail
   },
   {
-    path: '/review-form/',
+    path: '/review-form',
     name: 'ReviewForm',
     component: ReviewForm
   },

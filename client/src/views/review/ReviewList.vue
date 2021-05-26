@@ -12,6 +12,7 @@
             <tr class="text-white">
               <th scope="col">리뷰 제목</th>
               <th scope="col">작성자</th>
+              <th scope="col">평점</th>
               <th scope="col">작성 시간</th>
             </tr>
           </thead>

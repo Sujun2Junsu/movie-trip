@@ -1,19 +1,22 @@
 <template>
   <div class="container" v-if="review">
-    <div class="row align-items-center">
-      <h5 class="text-white col-8 offset-2 align-self-center">&lt; {{ movieTitle }} &gt; : {{ review.title }}</h5>
-      <span class="col-2">
-        <button @click="goUpdateReview()">수정</button>
-        <button @click="deleteReview()">삭제</button>
-      </span>
-    </div>
-    <br>
     <div class="row justify-content-around">
       <div class="col">작성자: {{ userName }}</div>
       <div class="col">등록: {{ createdTime }}</div>
       <div class="col">수정: {{ updatedTime }}</div>
       <hr>
-      <p class="text-white border-top-0">{{ review.content }}</p>
+    </div>
+    <div class="row align-items-center">
+      <h5 class="text-white col-7 m-0">&lt; {{ movieTitle }} &gt; : {{ review.title }}</h5>
+      <h5 class="text-white col-3 m-0">{{ starRank }}</h5>
+      <span class="col-2">
+        <button @click="goUpdateReview()">수정</button>
+        <button @click="deleteReview()">삭제</button>
+      </span>
+    </div>
+    <hr>
+    <div>      
+      <p class="text-white" style="text-align: left; padding-left: 100px">{{ review.content }}</p>
     </div>
     <br>
     <div>
@@ -45,7 +48,7 @@ export default {
     }
   },
   components: {
-    CommentList
+    CommentList,
   },
   methods: {
     setToken: function () {
@@ -117,6 +120,13 @@ export default {
     updatedTime: function () {
       return moment(this.review.updated_at).format('LLL')
     },
+    starRank: function () {
+      let stars = ''
+      for (let i = 0; i < this.review.rank; i++) {
+        stars = stars + '★'
+      }
+      return stars
+    }
   },
   created: function () {
     this.getReviewDetail()

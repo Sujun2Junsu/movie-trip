@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-start">
     <span v-if="userName" class="col-2 offset-1  text-secondary">
-      {{ userName }} :
+      - {{ userName }} :
     </span>
     <span class="col-2 text-secondary">
       {{ comment.content }}
@@ -24,6 +24,7 @@ export default {
   data: function () {
     return {
       userName: null,
+      isCreateUser: null,
     }
   },
   props: {
@@ -46,6 +47,7 @@ export default {
       })
         .then(res => {
           this.userName = res.data.username
+          
         })
     },
     deleteComment: function () {
