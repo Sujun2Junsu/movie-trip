@@ -1,20 +1,8 @@
 <template>
   <div class="row justify-content-start container">
-    <br>
+    <br><hr><br>
     <span class="col-3 text-white">댓글 목록</span>
     <br>
-    <div class="row justify-content-start">
-      <span class="col-2 offset-1">
-        작성자
-      </span>
-      <span class="col-2">
-        댓글
-      </span>
-      <span class="col-3 offset-2">
-        작성 시간
-      </span>
-    </div>
-    <hr>
     <div>
       <CommentListItem
         id="commentReload"
@@ -26,8 +14,9 @@
     </div>
     <br><br><hr>
     <div class="row justify-content-around align-items-center">
-      <span class="col-8"><input type="text" class="form-control" v-model="commentContent" @keyup.enter="createComment"></span>
-      <span class="col-2"><button @click="createComment">댓글 등록</button></span>
+      <span class="col-6 offset-3"><input type="text" class="form-control" v-model="commentContent" @keyup.enter="createComment"></span>
+      <span class="col-3"><button @click="createComment">댓글 등록</button></span>
+      <br><br>
     </div>
   </div>
 </template>

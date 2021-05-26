@@ -7,6 +7,21 @@
       <input type="input" class="form-control" id="exampleFormControlInput1" v-model="reviewTitle" :placeholder="review.title">
     </div>
     <div class="mb-3">
+      <label for="rating" class="form-label row"> - 평점: {{ review.rank }}점</label>
+      <div class="star-rating" id="rating">
+        <input type="radio" id="5-stars" name="rating" value="5" v-model="rank"/>
+        <label for="5-stars" class="star">&#9733;</label>
+        <input type="radio" id="4-stars" name="rating" value="4" v-model="rank"/>
+        <label for="4-stars" class="star">&#9733;</label>
+        <input type="radio" id="3-stars" name="rating" value="3" v-model="rank"/>
+        <label for="3-stars" class="star">&#9733;</label>
+        <input type="radio" id="2-stars" name="rating" value="2" v-model="rank"/>
+        <label for="2-stars" class="star">&#9733;</label>
+        <input type="radio" id="1-star" name="rating" value="1" v-model="rank"/>
+        <label for="1-star" class="star">&#9733;</label>
+      </div>
+    </div>
+    <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label row justify-content-start"> -  내용</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" v-model="reviewContent" :placeholder="review.content"></textarea>
     </div>
@@ -27,6 +42,7 @@ export default {
       movieId: this.$route.params.movieId,
       review: null,
       user: null,
+      rank: 0,
     }
   },
   methods: {
