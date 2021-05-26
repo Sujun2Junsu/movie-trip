@@ -7,14 +7,21 @@
         <button @click="deleteReview()">삭제</button>
       </span>
     </div>
+    <br>
     <div class="row justify-content-around">
       <div class="col">작성자: {{ userName }}</div>
       <div class="col">등록: {{ createdTime }}</div>
       <div class="col">수정: {{ updatedTime }}</div>
+      <hr>
+      <p class="text-white border-top-0">{{ review.content }}</p>
     </div>
-    <hr>
-    <p class="text-white">{{ review.content }}</p>
-    <hr>
+    <br>
+    <div>
+      <CommentList
+        :movieId="parseInt(movieId)"
+        :reviewId="parseInt(reviewId)"
+      />
+    </div>
   </div>
 
 </template>
@@ -22,6 +29,8 @@
 <script>
 import axios from 'axios'
 import moment from 'moment'
+
+import CommentList from '@/components/reviews/CommentList'
 
 export default {
   name: 'ReviewDetail',
@@ -32,8 +41,11 @@ export default {
       review: null,
       userName: null,
       movieTitle: null,
-      is_same_user: null,
+      // is_same_user: null,
     }
+  },
+  components: {
+    CommentList
   },
   methods: {
     setToken: function () {
@@ -87,20 +99,19 @@ export default {
     goUpdateReview: function () {
       this.$router.push({ name: 'ReviewUpdateForm', params: { movieId: this.movieId, reviewId: this.reviewId }})
     },
-    isSameUser: function () {
-      axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/movies/review-same-user/${this.reviewId}/`
-      })
-      .then(res => {
-        console.log('유저')
-        console.log(res)
-      })
-    }
+    // isSameUser: function () {
+    //   axios({
+    //     method: 'get',
+    //     url: `http://127.0.0.1:8000/movies/review-same-user/${this.reviewId}/`
+    //   })
+    //   .then(res => {
+    //     console.log('유저')
+    //     console.log(res)
+    //   })
+    // }
   },
   computed: {
     createdTime: function () {
-      moment.locale('kr')
       return moment(this.review.created_at).format('LLL')
     },
     updatedTime: function () {
@@ -109,7 +120,7 @@ export default {
   },
   created: function () {
     this.getReviewDetail()
-    this.isSameUser()
+    // this.isSameUser()
   }
 }
 </script>
