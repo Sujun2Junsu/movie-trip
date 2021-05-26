@@ -7,20 +7,23 @@
       <div class="modal-content">
       <header class="my-modal__header">
         <span>Login</span>
+        <!-- <button @click="$emit('update:visible', !visible)">Close</button> -->
+        <!-- <button @click="$emit('update:visible', !visible)" type="button" class="btn-close justify-content-end" aria-label="Close"></button> -->
       </header>
       <div class="my-modal__body">
         <div>
-          <label for="username" class="form-label">사용자 이름</label>
-          <input type="text" class="form-control" id="username" v-model="credentials.username" placeholder="Username">
+          <label for="username1" class="form-label">사용자 이름</label>
+          <input type="text" class="form-control" id="username" v-model="credentials1.username" placeholder="Username">
         </div>
           <br>
         <div>
-          <label for="password" class="form-label">비밀번호</label>
-          <input type="password" class="form-control" id="password" v-model="credentials.password" placeholder="Password">
+          <label for="password1" class="form-label">비밀번호</label>
+          <input type="password" class="form-control" id="password" v-model="credentials1.password" placeholder="Password">
         </div>
         </div>
         <div class="modal-footer">
-            <button @click="login" type="button" class="btn btn-primary" data-bs-dismiss="modal">Login</button>
+            <!-- <button @click="login" type="button" class="btn btn-primary" data-bs-dismiss="modal">Login</button> -->
+            <button @click="login" type="button" class="btn btn-primary" >Login</button>
             <button @click="$emit('update:visible', !visible)" type="button" class="btn btn-secondary">Close</button>
         </div>
       </div>
@@ -47,7 +50,7 @@ export default {
   },
   data: function () {
     return {
-      credentials: {
+      credentials1: {
         username: null,
         password: null,
       }
@@ -58,13 +61,14 @@ export default {
       axios({
         method: 'post',
         url: 'http://127.0.0.1:8000/accounts/api-token-auth/',
-        data: this.credentials,        
+        data: this.credentials1,        
       })
         .then(res => {
           console.log(res)
           localStorage.setItem('jwt', res.data.token)
           this.$emit('my-modal')
-          // this.$router.push({ name: 'Home'})           
+          // this.$router.push({ name: 'Home'})
+          // login 후 modal close 안되는 것 위해 새로고침    
           location.reload()
         })
         .catch(err => {
@@ -93,10 +97,7 @@ $module: 'my-modal';
   //This is modal layer
   &__dialog{
     z-index: 999;
-    // left: 50%;
-    // top: 75px;
     width: 600px;
-    // position: absolute;
     background: #fff;
     margin-bottom: 50px;
     // modal 가운데 등장하게 크기 상관없이

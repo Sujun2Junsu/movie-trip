@@ -3,6 +3,7 @@ from django.urls import path
 from . import views
 
 # app_name="accounts" 405error 발생
+# app_name="accounts"
 
 urlpatterns = [
     path('signup/', views.signup),
