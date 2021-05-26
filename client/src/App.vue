@@ -16,11 +16,18 @@
       <span v-else>
         <ul class="nav justify-content-end">
           <li class="nav-item">
-            <router-link :to="{ name: 'Login' }">Login</router-link> |
+            <button @click="handleClickButton">Login</button>
+            <app-my-modal
+              :visible.sync="visible">
+            </app-my-modal>
           </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'Signup' }">Signup</router-link>
-          </li>
+          <!-- <li class="nav-item">
+            <button @click="handleClickButton">Signup</button>
+            <signup-modal
+              :visible.sync="visible">
+            </signup-modal>
+            <router-link :to="{ name: 'Signup' }">Signup</router-link> -->
+          <!-- </li> -->
         </ul>  
         <ul class="nav justify-content-center">
           <li class="nav-item">
@@ -30,36 +37,48 @@
       </span>
     </div>
     <router-view @login="isLogin = true"/>
-    <!-- <footer> -->
-      <!-- Copyright -->
-      <!-- <div class="text-center p-3" style="background-color: gray-dark;"> -->
-      <!-- 아래는 반응형 footer/ 위에는 고정형  -->
-      <!-- <div class="fixed-bottom d-flex justify-content-center pt-5">© 2021 Copyright: 수준이 준수(석정준, 서민수)</div> -->
-      <!-- Copyright -->
-    <!-- </footer> -->
+
     <!-- 아래는 하단 고정형 -->
     <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
       <div class="container text-center">
-        <small>Copyright &copy; Your Website</small>
+        <small>Copyright &copy; 서울 4반 석정준 서민수</small>
       </div>
     </footer>
   </div>
 </template>
 
 <script>
+import myModal from '@/views/accounts/Login'
+// import myModal from '@/views/accounts/Signup'
+// import signupModal from '@/views/accounts/Signup'
+
 export default {
   name: 'App',
   data: function () {
     return {
       isLogin: false,
+      visible: false
     }
+  },
+  components: {
+    appMyModal: myModal,
+    // signupModal: signupModal
   },
   methods: {
     logout: function () {
       this.isLogin = false
       localStorage.removeItem('jwt')
       this.$router.push({ name: 'Login'})
+    },
+    // moveToLogin: function () {
+    //   this.$router.push({name: 'Login'})
+    // },
+    handleClickButton(){
+      this.visible = !this.visible
     }
+    // signupClickButton(){
+    //   this.visible = !this.visible
+    // } 
   },
   created: function () {
     const token = localStorage.getItem('jwt')
