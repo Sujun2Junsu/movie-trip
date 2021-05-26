@@ -15,7 +15,7 @@
     <br><br><hr>
     <div class="row justify-content-around align-items-center">
       <span class="col-6 offset-3"><input type="text" class="form-control" v-model="commentContent" @keyup.enter="createComment"></span>
-      <span class="col-3"><button @click="createComment">댓글 등록</button></span>
+      <span class="col-3"><button @click="createComment" class="btn btn-outline-light">댓글 등록</button></span>
       <br><br>
     </div>
   </div>

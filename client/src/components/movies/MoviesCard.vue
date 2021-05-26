@@ -3,7 +3,7 @@
     <div class="card">
       <img :src="movie.poster_path" class="card-img-top" :alt="movie.title">
       <div class="card-body">
-        <h5 class="card-title text-white">{{ movie.title }}</h5>
+        <p class="card-title text-light">{{ movie.title }}</p>
       </div>
     </div>
   </div>
@@ -28,5 +28,12 @@ export default {
 <style>
 .card-body {
   background-color: #070B19;
+  font-size:0.75rem
+  /* border: 0; */
+  /* outline: 0; */
+}
+.card {
+  border: 0;
+  /* outline: 0; */
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div class="row" v-if="movie">
-      <span class="col-3 align-self-start"><router-link :to="{ name: 'Movies' }">[전체영화 보기]</router-link></span>
+      <!-- <span class="col-3 align-self-start"><router-link :to="{ name: 'Movies' }" class="text-light">All Movies</router-link></span> -->
       <div class="movie-title row align-items-center justify-content-around">
         <span class="col"><h4 class="text-white mb-0">{{ movie.title }}</h4></span>
-        <span class="col"><button>찜</button></span>
+        <!-- <span class="col"><button>찜</button></span> -->
       </div>
       <br>
       <div class="col-lg-4">
@@ -86,7 +86,8 @@ export default {
 
 <style>
   .movie-title {
-    border: 0.1px solid gray;
+    border: 0;
+    /* border: 0.1px solid gray; */
     border-radius: 10px;
     padding: 10px;
     margin: 10px;

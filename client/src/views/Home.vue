@@ -1,9 +1,16 @@
 <template>
   <div class="home container">
+    <br>
     <NowPlayingMovies/>
-    <router-link :to="{ name: 'Movies' }" class="text-light">전체영화 보기</router-link>
+    <br>
+    <!-- <router-link :to="{ name: 'Movies' }" class="text-light">전체영화 보기</router-link> -->
+    <br>
     <PopularMovies/>
+    <br>
+    <br>
+    <br>
     <TopRatedMovies/>
+    <br>
   </div>
 </template>
 

@@ -3,11 +3,11 @@
     <h4 v-if="movieTitle">&lt;{{ movieTitle }}&gt; 리뷰 작성</h4>
     <hr>
     <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label row justify-content-start"> - 리뷰 제목</label>
+      <label for="exampleFormControlInput1" class="form-label row justify-content-start"> 리뷰 제목</label>
       <input type="input" class="form-control" id="exampleFormControlInput1" v-model="reviewTitle">
     </div>
     <div class="mb-3">
-      <label for="rating" class="form-label row"> - 평점: {{ rank }}점</label>
+      <label for="rating" class="form-label row"> 평점: {{ rank }}점</label>
       <div class="star-rating" id="rating">
         <input type="radio" id="5-stars" name="rating" value="5" v-model="rank"/>
         <label for="5-stars" class="star">&#9733;</label>
@@ -22,10 +22,10 @@
       </div>
     </div>
     <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label row justify-content-start"> -  리뷰 내용</label>
+      <label for="exampleFormControlTextarea1" class="form-label row justify-content-start"> 리뷰 내용</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" v-model="reviewContent"></textarea>
     </div>
-    <button @click="createReview">등록</button>
+    <button @click="createReview" class="btn btn-outline-light">등록</button>
   </div>
 </template>
 
@@ -96,7 +96,8 @@ export default {
 
 <style>
 .star-rating {
-  border:solid 1px #ccc;
+  border:0;
+  /* border:solid 1px #ccc; */
   display:flex;
   flex-direction: row-reverse;
   font-size:1.5em;
