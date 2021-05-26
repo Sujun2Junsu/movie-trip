@@ -3,11 +3,11 @@
     <h4>리뷰 수정</h4>
     <hr>
     <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label row justify-content-start"> - 제목</label>
+      <label for="exampleFormControlInput1" class="form-label row justify-content-start"> 제목</label>
       <input type="input" class="form-control" id="exampleFormControlInput1" v-model="reviewTitle" :placeholder="review.title">
     </div>
     <div class="mb-3">
-      <label for="rating" class="form-label row"> - 평점: {{ review.rank }}점</label>
+      <label for="rating" class="form-label row"> 평점: {{ review.rank }}점</label>
       <div class="star-rating" id="rating">
         <input type="radio" id="5-stars" name="rating" value="5" v-model="rank"/>
         <label for="5-stars" class="star">&#9733;</label>
@@ -22,10 +22,10 @@
       </div>
     </div>
     <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label row justify-content-start"> -  내용</label>
+      <label for="exampleFormControlTextarea1" class="form-label row justify-content-start"> 내용</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" v-model="reviewContent" :placeholder="review.content"></textarea>
     </div>
-    <button @click="updateReview">수정완료</button>
+    <button @click="updateReview" class="btn btn-primary">수정완료</button>
   </div>
 </template>
 

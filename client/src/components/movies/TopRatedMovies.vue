@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    Top Rated
+    
+    <div class="h4 text-light">
+      #Top Rated  #최고의 명작
+    </div>
+    <br>
     <splide :options="options">
       <splide-slide>
         <div v-if="topRatedMovie1">

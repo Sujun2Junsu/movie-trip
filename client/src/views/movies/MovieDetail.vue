@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <div class="row" v-if="movie">
-      <span class="col-3 align-self-start"><router-link :to="{ name: 'Movies' }">[전체영화 보기]</router-link></span>
+      <!-- <span class="col-3 align-self-start">
+        <router-link :to="{ name: 'Movies' }" class="text-light">All Movies</router-link>
+      </span> -->
       <div class="movie-title row align-items-center">
         <span class="col"><h4 class="text-white mb-0">&lt;{{ movie.title }}&gt;</h4></span>
       </div>

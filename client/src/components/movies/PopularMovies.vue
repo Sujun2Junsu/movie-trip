@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    Popular
+    <div class="h4 text-light">
+      # 나만 빼고 다 본 영화!
+    </div>
+    <br>
     <splide :options="options">
       <splide-slide>
         <div v-if="popularMovie1">

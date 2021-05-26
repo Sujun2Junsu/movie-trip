@@ -1,5 +1,5 @@
 <template>
-  <tr v-if="review" @click="goReviewDetail" class="text-white">
+  <tr v-if="review" @click="goReviewDetail" class="text-light">
     <th scope="row">{{ review.title }}</th>
     <td>{{ userName }}</td>
     <td>{{ starRank }}</td>

@@ -3,11 +3,13 @@
     <div class="container">
       <div class="row align-items-center">
         <span class="col-8 offset-2 align-self-center"><h5 class="text-white mb-0">영화리뷰</h5></span>
-        <span class="col-2"><button @click="goReviewForm">글 작성</button></span>
+        <span class="col-2">
+          <button @click="goReviewForm" type="button" class="btn btn-outline-light">글 작성</button>
+        </span>
       </div>
       <br>
       <div class="d-lg-block col-lg-12"> 
-        <table class="table table-dark table-hover">
+        <table class="table table-bg-#2c3e50 table-hover">
           <thead>
             <tr class="text-white">
               <th scope="col">리뷰 제목</th>

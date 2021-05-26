@@ -1,6 +1,7 @@
 <template>
   <div class="container" v-if="review">
-    <div class="row justify-content-around">
+    <br>
+    <div class="row justify-content-around text-light">
       <div class="col">작성자: {{ userName }}</div>
       <div class="col">등록: {{ createdTime }}</div>
       <div class="col">수정: {{ updatedTime }}</div>
@@ -10,8 +11,8 @@
       <h5 class="text-white col-7 m-0">&lt; {{ movieTitle }} &gt; : {{ review.title }}</h5>
       <h5 class="text-white col-3 m-0">{{ starRank }}</h5>
       <span class="col-2">
-        <button @click="goUpdateReview()">수정</button>
-        <button @click="deleteReview()">삭제</button>
+        <button @click="goUpdateReview()" class="btn btn-primary">수정</button>
+        <button @click="deleteReview()" class="btn btn-danger">삭제</button>
       </span>
     </div>
     <hr>

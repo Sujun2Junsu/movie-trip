@@ -1,16 +1,16 @@
 <template>
-  <div class="row justify-content-start">
-    <span v-if="userName" class="col-2 offset-1  text-secondary">
-      - {{ userName }} :
+  <div class="row justify-content-start text-light">
+    <span v-if="userName" class="col-2 offset-1 ">
+      {{ userName }} :
     </span>
-    <span class="col-2 text-secondary">
+    <span class="col-2">
       {{ comment.content }}
     </span>
     <span class="col-3 offset-2">
       {{ createdTime }}
     </span>
     <span class="col-1">
-      <button @click="deleteComment">삭제</button>
+      <button @click="deleteComment" class="btn btn-danger">삭제</button>
     </span>
   </div>
 </template>

@@ -2,18 +2,19 @@
   <div id="app">
     <div id="nav">
       <nav class="navbar navbar-expand-md navbar-dark bg-#2c3e50" style="height: 80px;">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <li class="nav-item">
+        <!-- <div class="container-fluid"> -->
+        <div class="container">
+          <ul class="nav-item">
             <router-link :to="{ name: 'Home'}">
               <img src="@/assets/logo.png" style="width:300px">
             </router-link>
-          </li>
+          </ul>
           <div class="collapse navbar-collapse container d-flex flex-row-reverse fs-5" id="navbarNav">
             <span v-if="isLogin">
               <ul class="navbar-nav">
+                <li class="nav-item">
+                  <router-link :to="{ name: 'Movies' }" class="text-light nav-link">Movie</router-link>
+                </li>
                 <li class="nav-item">
                   <router-link @click.native="logout" to="#" class="text-light nav-link active" text-decoration: none>Logout</router-link>
                 </li>
@@ -21,6 +22,10 @@
             </span>
             <span v-else>
               <ul class="navbar-nav gap-3">
+                <!-- 로그인 안한 사람들은 접근 못하게 -->
+                <!-- <li class="nav-item">
+                  <router-link :to="{ name: 'Movies' }" class="text-light nav-link">Movie</router-link>
+                </li> -->
                 <li class="nav-item">
                   <a @click="handleClickButton" class="text-light nav-link">Login</a>
                   <app-my-modal
@@ -115,9 +120,9 @@ export default {
   z-index: 100;
 }
 
-.navbarNav {
-  z-index: 991;
+a {
+  text-decoration:none;
+  /* outline: 0; */
 }
 
-a { text-decoration:none }
 </style>
