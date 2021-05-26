@@ -6,7 +6,7 @@ from rest_framework import status
 
 import requests
 from django.shortcuts import get_object_or_404, render, redirect, get_list_or_404
-from .models import Movie, Review
+from .models import Movie, Review, Comment
 # from django.contrib.auth import get_user_model
 from .serializers import MovieListSerializer, MovieSerializer, ReviewSerializer, CommentListSerializer
 
@@ -80,59 +80,41 @@ def review_update_delete(request, review_pk):
     return Response({ 'id': review_pk }, status=status.HTTP_204_NO_CONTENT)
 
 
+@api_view(['GET', 'POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def comment_list(request, review_pk):
+  if request.method == 'GET':
+    comments = Comment.objects.all().filter(review_id=review_pk)
+    serializer = CommentListSerializer(comments, many=True)
+    return Response(serializer.data)
+  else:
+    serializer = CommentListSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+      review = get_object_or_404(Review, pk=review_pk)
+      review.save()
+      serializer.save(user=request.user)
+      return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['DELETE'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def comment_delete(request, comment_pk):
+  comment = get_object_or_404(Comment, pk=comment_pk)
+  if not request.user.user_comments.filter(pk=comment_pk).exists():
+    return Response({'message': '권한이 없습니다.'})
+  else:
+    comment.delete()
+    return Response({ 'id': comment_pk })
+
+
 # @api_view(['GET'])
 # # 로그인한 유저가 리뷰 작성 유저인지 확인하는 용도
 # def review_same_user(request, review_pk):
 #   if not request.user.user_reviews.filter(pk=review_pk).exists():
 #     return Response({'message': '권한이 없습니다.'})
 #   return Response({'message': '권한이 있습니다.'})
-
-
-
-# @api_view(['GET'])
-# @authentication_classes([JSONWebTokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# def comment_list(request, review_pk):
-#   review = get_object_or_404(Review, pk=review_pk)
-#   comments = review.comment_set.all()
-#   serializer = CommentListSerializer(comments, many=True)
-#   return Response(serializer.data)
-
-
-# @api_view(['POST'])
-# @authentication_classes([JSONWebTokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# def create_comment(request, review_pk):
-#   review = get_object_or_404(Review, pk=review_pk)
-#   serializer = CommentListSerializer(data=request.data)
-#   if serializer.is_valid(raise_exception=True):
-#     serializer.save(user=request.user, review=review)
-#     return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-
-#   else:
-#     review = get_object_or_404(Review, pk=review_pk)
-#     movie = get_object_or_404(Movie, pk=review.movie_id)
-#     movie.save()
-#     review.delete()
-#     return Response({ 'id': review_pk })
-
-
-# @api_view(['DELETE'])
-# @authentication_classes([JSONWebTokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# def comment_delete(request, review_pk, comment_pk):
-#   review = get_object_or_404(Review, pk=review_pk)
-#   comment = review.comment_set.get(pk=comment_pk)
-#   if not request.user.comments.filter(pk=comment_pk).exists():
-#     return Response({'message': '권한이 없습니다.'})
-
-#   else:
-#     comment.delete()
-#     return Response({ 'id': comment_pk })
-
-
-
 
 
 # @api_view(['POST'])
