@@ -10,7 +10,7 @@ import ReviewList from '@/views/review/ReviewList'
 import ReviewDetail from '@/views/review/ReviewDetail'
 import ReviewForm from '@/components/reviews/ReviewForm'
 import ReviewUpdateForm from '@/components/reviews/ReviewUpdateForm'
-
+import Recommend from '@/views/recommend/Recommend'
 
 
 Vue.use(VueRouter)
@@ -65,6 +65,11 @@ const routes = [
     path: '/review-update-form/:movieId/:reviewId',
     name: 'ReviewUpdateForm',
     component: ReviewUpdateForm
+  },
+  {
+    path: '/recommend',
+    name: 'Recommend',
+    component: Recommend
   },
 ]
 

@@ -16,6 +16,9 @@
                   <router-link :to="{ name: 'Movies' }" class="text-light nav-link">Movie</router-link>
                 </li>
                 <li class="nav-item">
+                  <router-link :to="{ name: 'Recommend' }" class="text-light nav-link">Trip</router-link>
+                </li>
+                <li class="nav-item">
                   <router-link @click.native="logout" to="#" class="text-light nav-link active" text-decoration: none>Logout</router-link>
                 </li>
               </ul>
