@@ -1,6 +1,10 @@
 <template>
   <div class="container text-white">
-    <h4 v-if="movieTitle">&lt;{{ movieTitle }}&gt; 리뷰 작성</h4>
+    <span class="row">
+      <a @click="$router.go(-1)" class="text-light fas fa-arrow-left col-1"></a>
+      <!-- <h4 v-if="movieTitle" class="col">&lt;{{ movieTitle }}&gt; 리뷰 작성</h4> -->
+      <h4 v-if="movieTitle">&lt;{{ movieTitle }}&gt; 리뷰 작성</h4>
+    </span>
     <hr>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label row justify-content-start"> 리뷰 제목</label>

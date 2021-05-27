@@ -1,6 +1,25 @@
 <template>
   <div class="container">
-    <p class="text-white h1"><i class="fas fa-paper-plane"></i> 어디로 여행을 갈까요?</p>
+    <div class="row">
+      <div @click="$router.go(-1)" class="text-light fas fa-arrow-left col-1 h1"></div>
+      <div class="text-white h1 col-6 offset-2"><i class="fas fa-paper-plane"></i> 어디로 여행을 갈까요?</div>
+      <!-- 아코디언 -->
+      <div class="accordion col-3 d-none d-lg-block" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              사용방법
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              사용방법 : 지도 위의 확대버튼을 눌러 가고싶은 나라에 사람이 위치하게 한 후 '어디로 여행을 갈까요?' 버튼을 누르세요!
+            </div>
+          </div>
+        </div>
+      </div>
+    <br>
+    <br>
     <div id="parent">
       <div id="child"><i class="fas fa-running"></i></div>
       <vl-map :load-tiles-while-animating="true" :load-tiles-while-interacting="true" 
@@ -10,15 +29,17 @@
           <vl-source-osm></vl-source-osm>
         </vl-layer-tile>
       </vl-map>
-      <div style="padding: 20px" class="text-white">
+      <div style="padding: 20px" class="text-light">
         현재 좌표 : {{ center }}<br><br>
       <button type="button" class="btn btn-primary" @click="getCountry">여기로 가요!</button>
       </div>
+      <br>
       <h4 class="text-white" v-if="countryName">{{ countryName }}의 최신 추천 영화는?</h4>
     </div>
     <RecommendMovies
       :countryCode="countryCode"
     />
+   </div>
   </div>
 </template>
 
@@ -73,6 +94,10 @@ export default {
               this.countryCode = parseInt(countryList[i].fullCd)
             } else if (this.countryName === 'Korea'){
               this.countryCode = 22041011
+            } else if (this.countryName === 'United'){
+              this.countryCode = 22042002
+            } else if (this.countryName === 'Russian'){
+              this.countryCode = 22044005
             }
           }
         })
@@ -104,4 +129,6 @@ export default {
   font-size: 40px;
   color: white;
 }
+
+
 </style>

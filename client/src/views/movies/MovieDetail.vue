@@ -1,11 +1,10 @@
 <template>
   <div class="container">
     <div class="row" v-if="movie">
-      <!-- <span class="col-3 align-self-start">
-        <router-link :to="{ name: 'Movies' }" class="text-light">All Movies</router-link>
-      </span> -->
       <div class="movie-title row align-items-center">
-        <span class="col"><h4 class="text-white mb-0">&lt;{{ movie.title }}&gt;</h4></span>
+        <span class="row">
+          <router-link :to="{ name: 'Movies' }" class="text-light fas fa-arrow-left col-1"></router-link>
+          <h4 class="text-white mb-0 col-10">&lt;{{ movie.title }}&gt;</h4></span>
       </div>
       <br>
       <br>

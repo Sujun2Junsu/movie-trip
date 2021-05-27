@@ -1,6 +1,11 @@
 <template>
   <div class="container text-white" v-if="review">
-    <h4>리뷰 수정</h4>
+    <span class="row">
+      <a @click="$router.go(-1)" class="text-light fas fa-arrow-left col-1"></a>
+      <!-- <h4 class="col ">리뷰 수정</h4> -->
+      <h4>리뷰 수정</h4>
+    </span>
+
     <hr>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label row justify-content-start"> 제목</label>
