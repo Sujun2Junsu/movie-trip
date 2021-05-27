@@ -7,47 +7,47 @@
     <splide :options="options">
       <splide-slide>
         <div v-if="popularMovie1">
-          <img @click="goMovieDetail1" :src="`https://image.tmdb.org/t/p/w200${popularMovie1.poster_path}`">
+          <img @click="goMovieDetail1" style="width:150px" :src="`https://image.tmdb.org/t/p/w200${popularMovie1.poster_path}`">
         </div>
       </splide-slide>
       <splide-slide>
         <div v-if="popularMovie2">
-          <img @click="goMovieDetail2" :src="`https://image.tmdb.org/t/p/w200${popularMovie2.poster_path}`">
+          <img @click="goMovieDetail2" style="width:150px" :src="`https://image.tmdb.org/t/p/w200${popularMovie2.poster_path}`">
         </div>
       </splide-slide>
       <splide-slide>
         <div v-if="popularMovie3">
-          <img @click="goMovieDetail3" :src="`https://image.tmdb.org/t/p/w200${popularMovie3.poster_path}`">
+          <img @click="goMovieDetail3" style="width:150px" :src="`https://image.tmdb.org/t/p/w200${popularMovie3.poster_path}`">
         </div>
       </splide-slide>
       <splide-slide>
         <div v-if="popularMovie4">
-          <img @click="goMovieDetail4" :src="`https://image.tmdb.org/t/p/w200${popularMovie4.poster_path}`">
+          <img @click="goMovieDetail4" style="width:150px" :src="`https://image.tmdb.org/t/p/w200${popularMovie4.poster_path}`">
         </div>
       </splide-slide>
       <splide-slide>
         <div v-if="popularMovie5">
-          <img @click="goMovieDetail5" :src="`https://image.tmdb.org/t/p/w200${popularMovie5.poster_path}`">
+          <img @click="goMovieDetail5" style="width:150px" :src="`https://image.tmdb.org/t/p/w200${popularMovie5.poster_path}`">
         </div>
       </splide-slide>
       <splide-slide>
         <div v-if="popularMovie6">
-          <img @click="goMovieDetail6" :src="`https://image.tmdb.org/t/p/w200${popularMovie6.poster_path}`">
+          <img @click="goMovieDetail6" style="width:150px" :src="`https://image.tmdb.org/t/p/w200${popularMovie6.poster_path}`">
         </div>
       </splide-slide>
       <splide-slide>
         <div v-if="popularMovie7">
-          <img @click="goMovieDetail7" :src="`https://image.tmdb.org/t/p/w200${popularMovie7.poster_path}`">
+          <img @click="goMovieDetail7" style="width:150px" :src="`https://image.tmdb.org/t/p/w200${popularMovie7.poster_path}`">
         </div>
       </splide-slide>
       <splide-slide>
         <div v-if="popularMovie8">
-          <img @click="goMovieDetail8" :src="`https://image.tmdb.org/t/p/w200${popularMovie8.poster_path}`">
+          <img @click="goMovieDetail8" style="width:150px" :src="`https://image.tmdb.org/t/p/w200${popularMovie8.poster_path}`">
         </div>
       </splide-slide>
       <splide-slide>
         <div v-if="popularMovie9">
-          <img @click="goMovieDetail9" :src="`https://image.tmdb.org/t/p/w200${popularMovie9.poster_path}`">
+          <img @click="goMovieDetail9" style="width:150px" :src="`https://image.tmdb.org/t/p/w200${popularMovie9.poster_path}`">
         </div>
       </splide-slide>
     </splide>
@@ -76,7 +76,7 @@ export default {
       popularMovie9: null,
       options: {
           type : 'loop',
-          perPage: 3,
+          perPage: 4,
         },
     }
   },
