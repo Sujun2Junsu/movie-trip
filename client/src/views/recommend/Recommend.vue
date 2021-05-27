@@ -11,7 +11,7 @@
               사용방법
             </button>
           </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               사용방법 : 지도 위의 확대버튼을 눌러 가고싶은 나라에 사람이 위치하게 한 후 '어디로 여행을 갈까요?' 버튼을 누르세요!
             </div>
