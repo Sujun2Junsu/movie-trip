@@ -2,6 +2,9 @@
   <div class="container" v-if="review">
     <br>
     <div class="row justify-content-around text-light">
+      <!-- <div class="col text-light fas fa-arrow-left"></div> -->
+      <!-- <router-link :to="{ name: 'ReviewList' }" class="text-light fas fa-arrow-left col-1"></router-link> -->
+      <a @click="$router.go(-1)" class="text-light fas fa-arrow-left col-1"></a>
       <div class="col">작성자: {{ userName }}</div>
       <div class="col">등록: {{ createdTime }}</div>
       <div class="col">수정: {{ updatedTime }}</div>

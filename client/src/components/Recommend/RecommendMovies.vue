@@ -1,11 +1,18 @@
 <template>
-  <div v-if="recommendMovie" class="container">
+  <div v-if="recommendMovie" class="container text-light">
     <hr>
-    <div><h4>{{ recommendMovie.movieNm }}({{ recommendMovie.movieNmOg }})</h4></div>
-    <div style="text-align: start;">- 개봉일: {{ recommendMovie.openDt }}</div>
-    <div style="text-align: start;">- 장르: {{ recommendMovie.genreAlt }}</div>
-    <div style="text-align: start;">- 상영시간: {{ recommendMovie.showTm }}분</div>
-    <div style="text-align: start;">- 감독: {{ recommendMovie.directors[0].peopleNm }}</div>
+    <div>
+      <h4>{{ recommendMovie.movieNm }}
+        <div v-if="recommendMovie.movieNmOg">
+          ({{ recommendMovie.movieNmOg }})
+        </div>
+      </h4>
+    </div>
+    <br>
+    <div v-if="recommendMovie.openDt" style="text-align: start;">- 개봉일: {{ recommendMovie.openDt }}</div>
+    <div v-if="recommendMovie.genreAlt" style="text-align: start;">- 장르: {{ recommendMovie.genreAlt }}</div>
+    <div v-if="recommendMovie.showTm" style="text-align: start;">- 상영시간: {{ recommendMovie.showTm }}분</div>
+    <div v-if="recommendMovie.directors[0]" style="text-align: start;">- 감독: {{ recommendMovie.directors[0].peopleNm }}</div>
   </div>
 </template>
 

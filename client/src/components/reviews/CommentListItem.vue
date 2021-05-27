@@ -9,7 +9,7 @@
     <span class="col-3 offset-2">
       {{ createdTime }}
     </span>
-    <span class="col-1">
+    <span class="col-2">
       <button @click="deleteComment" class="btn btn-danger">삭제</button>
     </span>
   </div>

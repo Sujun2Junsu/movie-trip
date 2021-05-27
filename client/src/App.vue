@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <div id="nav">
-      <nav class="navbar navbar-expand-md navbar-dark bg-#2c3e50" style="height: 80px;">
-        <!-- <div class="container-fluid"> -->
+      <nav class="navbar navbar-expand-sm navbar-dark bg-#2c3e50" style="height: 80px;">
         <div class="container">
           <ul class="nav-item">
             <router-link :to="{ name: 'Home'}">
               <img src="@/assets/logo.png" style="width:300px">
             </router-link>
           </ul>
+          <!-- <div class="collapse container d-flex flex-row-reverse fs-5" id="navbarNav"> -->
           <div class="collapse navbar-collapse container d-flex flex-row-reverse fs-5" id="navbarNav">
             <span v-if="isLogin">
               <ul class="navbar-nav">
@@ -19,7 +19,7 @@
                   <router-link :to="{ name: 'Recommend' }" class="text-light nav-link">Trip</router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link @click.native="logout" to="#" class="text-light nav-link active" text-decoration: none>Logout</router-link>
+                  <router-link @click.native="logout" to="#" class="text-light nav-link" text-decoration: none>Logout</router-link>
                 </li>
               </ul>
             </span>
