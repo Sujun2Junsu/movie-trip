@@ -457,7 +457,7 @@
 
   - create review
 
-    ![](README.assets/not null.PNG)
+    ![](README.assets/notnull.PNG)
 
     코드가 다 맞는거 같은데 이런 에러가 떴다. 한참 헤매다가 serializer문제라는 것을 깨달았다. `read_only_fields`에 `user`와 `movie`를 둘 다 넣었던 것이다. movie는 create시 등록해야하는데 말이다.
 
