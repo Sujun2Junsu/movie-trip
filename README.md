@@ -129,7 +129,7 @@
 
   - MovieList
 
-    ![]()
+    ![](README.assets/MovieList.PNG)
 
     TMDB API로 요청을 보내 바로 출력해주는 페이지, db에 저장되어 있는 것이 아니기 때문에 movieTitle을 이용해서 상세 페이지로 연결된다.
 
@@ -471,7 +471,7 @@
     ```
 
 
-  
+
 
   - create comment
 
